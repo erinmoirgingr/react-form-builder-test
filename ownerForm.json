@@ -1,0 +1,147 @@
+[
+    {
+        "element": "TextInput",
+        "systemField": true,
+        "displayName": "Text Input",
+        "icon": "fa fa-font",
+        "label": "Placeholder Label",
+        "defaultValue": "asdf",
+        "id": "20C867FD-B352-4ACE-951E-F0AD121CC363",
+        "name": "placeholder_label",
+        "tags": "test"
+    },
+    {
+        "element": "Telephone",
+        "displayName": "Email",
+        "icon": "fa fa-envelope",
+        "label": "Telephone",
+        "id": "B35FF370-A614-4604-90EC-C42D29EE93D1",
+        "name": "Telephone"
+    },
+    {
+        "label": "Image",
+        "id": "AA9DCB9E-78FE-4616-88A6-C499397A8B39",
+        "element": "Camera",
+        "name": "image"
+    },
+    {
+        "label": "Dropdown",
+        "optionsUrl": "/options.json",
+        "id": "316B58F1-B0F4-4D93-B664-85FD585C299B",
+        "element": "Dropdown",
+        "name": "dropdown",
+        "defaultValue": [
+            "option_1",
+            "option_3"
+        ]
+    },
+    {
+        "label": "Range",
+        "step": 1,
+        "defaultValue": 3,
+        "minValue": 1,
+        "maxValue": "5",
+        "minLabel": "One",
+        "maxLabel": "Two",
+        "id": "2E36B02E-9BB8-4FF3-B219-CE14D731BA0C",
+        "element": "Range",
+        "name": "range"
+    },
+    {
+        "label": "Checkboxes",
+        "options": [
+            {
+                "value": "place_holder_option_1",
+                "label": "Place holder option 1",
+                "key": "option_BD0BDBF9-BE29-46B8-AB32-55772B65E8F3"
+            },
+            {
+                "value": "place_holder_option_2",
+                "label": "Place holder option 2",
+                "key": "option_FA8DBC7E-9AEC-4336-A0E6-09D9C980E218",
+                "default": true
+            },
+            {
+                "value": "place_holder_option_3",
+                "label": "Place holder option 3",
+                "key": "option_FB49A7AB-7569-4EC2-9035-7D1711FA3368",
+                "default": true
+            }
+        ],
+        "id": "8FD3F9EF-F930-446F-B5CE-B88ACC4FD9E0",
+        "element": "Checkboxes",
+        "name": "checkboxes",
+        "defaultValue": [
+            "place_holder_option_2",
+            "place_holder_option_3"
+        ],
+        "systemField": true
+    },
+    {
+        "label": "Dropdown2",
+        "options": [
+            {
+                "value": "Test1",
+                "label": "Test1",
+                "key": "option_66907E7A-8FDF-49DE-BE15-35159556F50E"
+            },
+            {
+                "value": "Test2",
+                "label": "Test2",
+                "key": "option_E9D61CA8-32DE-4899-98BC-5A12E18C47C9"
+            },
+            {
+                "value": "Test3",
+                "label": "Test3",
+                "key": "option_FCB2331A-0B5C-4103-932D-A467F2C38573"
+            }
+        ],
+        "optionsUrl": "",
+        "id": "62CACDF3-3702-4DF5-ACD6-9117E065442E",
+        "element": "Dropdown",
+        "name": "dropdown_2"
+    },
+    {
+        "label": "Tags",
+        "multiple": true,
+        "options": [
+            {
+                "value": "Test1",
+                "key": "option_A0DDAC0F-0649-4CEA-B396-F5E50665D752",
+                "label": "Test1"
+            },
+            {
+                "value": "Test2",
+                "key": "option_C90709A1-3393-4772-AB34-972E4D39AD68",
+                "label": "Test2"
+            },
+            {
+                "value": "Test3",
+                "key": "option_C4335E8A-D508-4CD0-AC97-891630C6BD99",
+                "label": "Test3"
+            }
+        ],
+        "id": "860E7AB3-3980-48BF-9C94-1F7F2AD29BFA",
+        "element": "Tags",
+        "name": "tags"
+    },
+    {
+        "content": "Placeholder Text...",
+        "id": "E495050D-CEA1-4978-8134-0B1BB57B7B78",
+        "element": "Header"
+    },
+    {
+        "content": "Placeholder Text...",
+        "id": "21771983-5CA1-408B-89ED-86B8012C9D80",
+        "element": "Paragraph"
+    },
+    {
+        "id": "0F208232-0F98-4E8F-88EE-96536B2D17CC",
+        "element": "LineBreak"
+    },
+    {
+        "content": "Placeholder Text...",
+        "id": "EC2CE22F-10B1-45D1-85CE-410A8D397C28",
+        "element": "Header"
+    }
+]
