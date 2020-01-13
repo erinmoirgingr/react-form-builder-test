@@ -12,20 +12,20 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ["react-hot", "babel-loader?presets[]=es2015&presets[]=react"]
+        use: ["react-hot", "babel-loader?presets[]=es2015&presets[]=react"]
       },
       {
-        test: /\.scss$/,
-        loader: "style-loader!css-loader!sass-loader"
+        test: /\.scss|\.css$/,
+        use: "style-loader!css-loader!sass-loader"
       }
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.json', '.jsx', '.css', '.scss']
+    extensions: ['*', '.js', '.json', '.jsx', '.css', '.scss'],
   },
   plugins: [
     new webpack.ProvidePlugin({

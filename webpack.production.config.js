@@ -22,23 +22,29 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: ['babel-loader'],
-        query: {
-            presets: ['es2015', 'react']
-        }
+        use: [
+          {
+            loader: 'babel-loader',
+            query: {
+              presets: ['@babel/preset-env', '@babel/preset-react']
+            }
+          }
+        ],
       },
       {
         test: /\.scss$/,
-        loader: "style-loader!css-loader!sass-loader"
+        use: [
+          "style-loader", "css-loader", "sass-loader"
+        ]
       }
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.json', '.jsx', '.css', '.scss']
+    extensions: ['*', '.js', '.json', '.jsx', '.css', '.scss']
   },
   plugins: [
     new webpack.ProvidePlugin({
