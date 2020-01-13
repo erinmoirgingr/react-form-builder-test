@@ -84,7 +84,7 @@ export default class Signature extends FormElement {
         props.type = "hidden";
 
         let pad_props = {};
-        pad_props.clearButton = {true};
+        pad_props.clearButton = true;
         pad_props.height = 200;
         pad_props.width  = $(".container").width() || window.innerWidth;
         if (this.props.mutable) {
