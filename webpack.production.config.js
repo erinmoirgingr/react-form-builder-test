@@ -44,11 +44,12 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.json', '.jsx', '.css', '.scss']
+    extensions: ['*', '.js', '.json', '.jsx', '.css', '.scss'],
+    alias: { 'react': __dirname + '/node_modules/react' }
   },
   plugins: [
     new webpack.ProvidePlugin({
         _: 'lodash'
     })
-  ]
+  ],
 }

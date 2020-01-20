@@ -5,7 +5,8 @@ var assert = require('assert');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var TestUtils = require('react-addons-test-utils');
+import TestUtils from "react-dom/test-utils";
+// var TestUtils = require('react-addons-test-utils');
 
 import StarRating from 'react-star-rating';
 

@@ -3,3 +3,4 @@ build/
 components
 example/bundle.js
 example/.git
+npm-debug.log

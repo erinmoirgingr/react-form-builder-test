@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default React.createClass({
+export default class HeaderLabel extends Component {
   render() {
     return (
       <label htmlFor={this.props.htmlFor}>
@@ -37,7 +37,7 @@ export default React.createClass({
           (!this.props.mutable && _.get(this.props.data, 'hideOnCreate', false) === true) &&
           <span className="label-required label label-warning">Hidden on Registration Form</span>
         }
-        {!_.isUndefined(this.props.description) && !_.isEmpty(this.props.description) && !this.props.readOnly && 
+        {!_.isUndefined(this.props.description) && !_.isEmpty(this.props.description) && !this.props.readOnly &&
           <p className="help-block">
             {this.props.description}
           </p>
@@ -45,4 +45,4 @@ export default React.createClass({
       </label>
     )
   }
-})
+}

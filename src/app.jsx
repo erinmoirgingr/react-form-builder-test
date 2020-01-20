@@ -9,6 +9,6 @@ import HeaderBar from './form-elements/util/header-bar'
 import HeaderLabels from './form-elements/util/header-labels'
 import * as FormElements from './form-elements';
 
-require('../css/application.css.scss');
+import "../css/application.css.scss";
 
 export { FormBuilder, FormGenerator, FormElement, FormElementWithOptions, FormElementStatic, FormElements, HeaderBar, HeaderLabels };

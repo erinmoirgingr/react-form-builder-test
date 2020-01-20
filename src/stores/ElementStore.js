@@ -122,4 +122,5 @@ var ElementStore = Reflux.createStore({
 
 });
 
-module.exports = ElementStore;
+
+export default ElementStore;

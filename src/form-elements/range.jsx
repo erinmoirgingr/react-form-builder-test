@@ -41,6 +41,9 @@ export default class Range extends FormElement {
     }
 
     renderComponent() {
+
+      // console.log(SliderNativeBootstrap);
+
         let props = this.baseInputProps();
         props.type = "range";
         props.list = "tickmarks_" + this.props.data.name;

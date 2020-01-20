@@ -53,7 +53,8 @@ export default class Checkboxes extends FormElementWithOptions {
                 }
 
                 props.name          = props.name + '[]';
-                props.htmlId        = props.htmlId + '_' + option.value;
+                props.id            = props.htmlId + '_' + option.value;
+                delete props.htmlId;
 
                 props.type = "checkbox";
 
