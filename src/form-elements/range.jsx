@@ -1,12 +1,23 @@
 import React from 'react';
 import FormElement from './util/form-element.jsx';
-var Slider = require("bootstrap-slider");
 import SliderNativeBootstrap from 'react-bootstrap-native-slider';
 
 import HeaderBar from './util/header-bar.jsx';
 import HeaderLabels from './util/header-labels.jsx';
 
 export default class Range extends FormElement {
+
+    constructor(props) {
+      super(props);
+      if(!this.refElems) {
+        this.refElems = {};
+      }
+      this.refElems = {
+        ...this.refElems,
+        rangeInput: React.createRef(),
+      }
+    }
+
     static toolbarEntry() {
         return {
             element: 'Range',
@@ -41,8 +52,6 @@ export default class Range extends FormElement {
     }
 
     renderComponent() {
-
-      // console.log(SliderNativeBootstrap);
 
         let props = this.baseInputProps();
         props.type = "range";
@@ -84,7 +93,7 @@ export default class Range extends FormElement {
                         <span className="pull-right">{this.props.data.maxLabel}</span>
                     </div>
                     <SliderNativeBootstrap
-                        ref={'rangeInput'}
+                        ref={this.refElems.rangeInput}
                         name={props.name}
                         value={props.defaultValue}
                         step={this.props.data.step}

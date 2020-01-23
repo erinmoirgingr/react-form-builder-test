@@ -19,6 +19,11 @@ export default class ReactForm extends React.Component {
             _data: _.get(props, 'data', []),
             isDirty: false,
         }
+
+        this.refElems = {};
+        (props.data || []).forEach(item => {
+          refElems[item.name] = React.createRef();
+        })
     }
 
     componentDidMount() {
@@ -28,6 +33,10 @@ export default class ReactForm extends React.Component {
                 function(response) {
                     this.setState({
                         _data: response
+                    }, () => {
+                      (response || []).forEach(item => {
+                        refElems[item.name] = React.createRef();
+                      })
                     });
                 }.bind(this),
                 'json'
@@ -70,10 +79,10 @@ export default class ReactForm extends React.Component {
             if ($item.props.data.required === true) {
                 if(
                     (
-                        !_.isUndefined(self.props.reservationTypeIds) && 
-                        self.props.reservationTypeIds.length > 0 && 
-                        !_.isUndefined($item.props.data.reservationTypesRequired) && 
-                        $item.props.data.reservationTypesRequired.length > 0 &&  
+                        !_.isUndefined(self.props.reservationTypeIds) &&
+                        self.props.reservationTypeIds.length > 0 &&
+                        !_.isUndefined($item.props.data.reservationTypesRequired) &&
+                        $item.props.data.reservationTypesRequired.length > 0 &&
                         _.intersection($item.props.data.reservationTypesRequired, self.props.reservationTypeIds).length > 0
                     ) ||
                     _.isUndefined($item.props.data.reservationTypesRequired) ||
@@ -95,10 +104,10 @@ export default class ReactForm extends React.Component {
             if (_.isFunction($item.validate)) {
                 if(
                     (
-                        !_.isUndefined(self.props.reservationTypeIds) && 
-                        self.props.reservationTypeIds.length > 0 && 
-                        !_.isUndefined($item.props.data.reservationTypesRequired) && 
-                        $item.props.data.reservationTypesRequired.length > 0 &&  
+                        !_.isUndefined(self.props.reservationTypeIds) &&
+                        self.props.reservationTypeIds.length > 0 &&
+                        !_.isUndefined($item.props.data.reservationTypesRequired) &&
+                        $item.props.data.reservationTypesRequired.length > 0 &&
                         _.intersection($item.props.data.reservationTypesRequired, self.props.reservationTypeIds).length > 0
                     ) ||
                     _.isUndefined($item.props.data.reservationTypesRequired) ||
@@ -236,7 +245,7 @@ export default class ReactForm extends React.Component {
                 isVisible = false;
             }
 
-            
+
             if(this.props.reservationTypeIds.length > 0 && !_.isUndefined(item.reservationTypesVisible) && item.reservationTypesVisible.length > 0 &&  _.intersection(item.reservationTypesVisible, this.props.reservationTypeIds).length === 0) {
                 isVisible = false;
             }
@@ -273,7 +282,7 @@ export default class ReactForm extends React.Component {
             let props = {
                 mutable:        true,
                 key:            item.id + '-' + (item.required ? '1' : '0'),
-                ref:            item.name,
+                ref:            this.refElems[item.name],
                 data:           item,
                 readOnly:       this.props.readOnly,
                 isTable:        this.props.isTable,

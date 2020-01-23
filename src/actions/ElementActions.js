@@ -1,4 +1,4 @@
-var Reflux = require('reflux');
+import Reflux from "reflux";
 
 var ElementActions = Reflux.createActions([
   'createElement',
@@ -8,4 +8,4 @@ var ElementActions = Reflux.createActions([
   'save'
 ]);
 
-module.exports = ElementActions;
+export default ElementActions;

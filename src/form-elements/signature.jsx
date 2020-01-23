@@ -15,6 +15,10 @@ export default class Signature extends FormElement {
         this.state = {
             showPad: false
         };
+
+        this.refElems = _.extend(this.refElems, {
+          "canvas": React.createRef(),
+        })
     }
     static toolbarEntry() {
         return {
@@ -32,10 +36,10 @@ export default class Signature extends FormElement {
 
     validate() {
         let isEmpty     = (this.props.defaultValue !== undefined && this.props.defaultValue.length > 0 ? false : true);
-        let $input_sig  = ReactDOM.findDOMNode(this.refs.input);
+        let $input_sig  = ReactDOM.findDOMNode(this.refElems.input.current);
 
-        if(this.refs.canvas) {
-            let $canvas_sig  = this.refs.canvas;
+        if(this.refElems.canvas.current) {
+            let $canvas_sig  = this.refElems.canvas.current;
             let base64       = $canvas_sig.toDataURL().replace('data:image/png;base64,', '');
             isEmpty          = $canvas_sig.isEmpty();
             $input_sig.value = base64;
@@ -54,7 +58,7 @@ export default class Signature extends FormElement {
 
     componentDidMount() {
         if (this.props.defaultValue !== undefined && this.props.defaultValue.length > 0 && this.state.showPad) {
-            let canvas = this.refs.canvas;
+            let canvas = this.refElems.canvas.current;
             canvas.fromDataURL('data:image/png;base64,' + this.props.defaultValue);
         }
     }
@@ -64,16 +68,16 @@ export default class Signature extends FormElement {
             showPad: !this.state.showPad
         }, function() {
             if(this.props.defaultValue !== undefined && this.props.defaultValue.length > 0) {
-                let canvas = this.refs.canvas;
+                let canvas = this.refElems.canvas.current;
                 canvas.fromDataURL('data:image/png;base64,' + this.props.defaultValue);
             }
         })
     }
 
     onChange(data) {
-       if(this.refs.canvas) {
-            let $input_sig   = ReactDOM.findDOMNode(this.refs.input);
-            let $canvas_sig  = this.refs.canvas;
+       if(this.refElems.canvas.current) {
+            let $input_sig   = ReactDOM.findDOMNode(this.refElems.input.current);
+            let $canvas_sig  = this.refElems.canvas.current;
             let base64       = $canvas_sig.toDataURL().replace('data:image/png;base64,', '');
             $input_sig.value = base64;
         }
@@ -89,7 +93,7 @@ export default class Signature extends FormElement {
         pad_props.width  = $(".container").width() || window.innerWidth;
         if (this.props.mutable) {
             pad_props.defaultValue = this.props.defaultValue;
-            pad_props.ref = 'canvas';
+            pad_props.ref = this.refElems.canvas;
             pad_props.onEnd = this.onChange.bind(this);
         }
         return (
@@ -102,7 +106,7 @@ export default class Signature extends FormElement {
                     <a className="btn btn-default" onClick={this.toggleShowPad.bind(this)}>
                         {"I'm ready to sign"}
                     </a>
-                }   
+                }
                 <input {...props} />
             </div>
         );

@@ -44,14 +44,14 @@ export default class Tags extends FormElementWithOptions {
     }
 
     validateRequired() {
-        return (this.refs.input.state.value.length > 0);
+        return (this.refElems.input.current.state.value.length > 0);
     }
 
     renderComponent() {
         let props = this.baseInputProps();
         props.multi = true;
         props.value = this.state.value;
-        props.ref = 'input';
+        props.ref = this.refElems.input;
 
         props.options = this.props.data.options;
         if (!this.props.mutable) {props.value = this.props.data.options[0].value} // to show a sample of what tags looks like

@@ -27,6 +27,19 @@ export default class Checkboxes extends FormElementWithOptions {
         }
     }
 
+    constructor(props) {
+      super(props);
+      if(!this.refElems) {
+        this.refElems = {};
+      }
+      this.refElems = {
+        ...this.refElems,
+      }
+      props.data.options.forEach(option => {
+        this.refElems["option_" + option.value] = React.createRef();
+      })
+    }
+
     validateRequired() {
         for (let refName in this.refs) {
             if (refName.indexOf('option_') === 0) {
@@ -63,7 +76,7 @@ export default class Checkboxes extends FormElementWithOptions {
                 } else {
                     props.checked        = defaultValue.indexOf(option.value) > -1;
                 }
-                props.ref = "option_" + option.value;
+                props.ref = self.refElems["option_" + option.value];
 
                 return (
                     <label className="checkbox-label" key={option.value}>

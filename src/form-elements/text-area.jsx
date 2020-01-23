@@ -31,7 +31,7 @@ export default class TextArea extends FormElement {
         props.defaultValue = this.props.defaultValue;
 
         if (this.props.mutable) {
-            props.ref = 'input';
+            props.ref = this.refElems.input;
         }
 
         return (<textarea {...props} />);

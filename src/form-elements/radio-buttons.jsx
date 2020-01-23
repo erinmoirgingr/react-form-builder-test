@@ -26,6 +26,14 @@ export default class RadioButtons extends FormElementWithOptions {
         }
     }
 
+    constructor(props) {
+      super(props);
+      this.refElems = {};
+      props.data.options.forEach(option => {
+        this.refElems["option_" + option.key] = React.createRef();
+      })
+    }
+
     validateRequired() {
         for (let refName in this.refs) {
             if (refName.indexOf('option_') === 0) {
@@ -64,7 +72,7 @@ export default class RadioButtons extends FormElementWithOptions {
                 <div>True</div>
             );
         }
-        
+
         if(this.props.inline) {
             return (
                 <span>{this.props.defaultValue}</span>
@@ -102,7 +110,7 @@ export default class RadioButtons extends FormElementWithOptions {
                     props.checked = defaultValue.indexOf(option.value) > -1;
                 }
 
-                props.ref = "option_" + option.key;
+                props.ref = self.refElems["option_" + option.key];
 
                 return (
                     <label className="radio-label" key={this_key}>

@@ -11,6 +11,9 @@ export default class FormElement extends SortableItem {
         super(props);
 
         this.htmlId = _.uniqueId('react-form-builder_' + props.data.name + '_');
+        this.refElems = {
+          input: React.createRef(),
+        }
     }
 
     static toolbarEntry() {
@@ -47,7 +50,7 @@ export default class FormElement extends SortableItem {
 
     baseInputProps() {
         let props = {
-            ref:            'input',
+            ref:            this.refElems.input,
             id:             this.htmlId,
             name:           this.props.data.name,
             readOnly:       this.props.mutable === false,

@@ -140,6 +140,8 @@ export default class FormBuilderPreview extends React.Component {
             }
         });
 
+        console.log(items);
+
         return (
             <div className={classes}>
                 { this.state.errors.length > 0 &&
@@ -170,7 +172,7 @@ export default class FormBuilderPreview extends React.Component {
                     }
                 </div>
                 <Sortable sensitivity={0} key={this.state.data.length} onSort={this.handleSort.bind(this)}>
-                    {items}
+                    {items.filter(i => !!i)}
                 </Sortable>
             </div>
         )

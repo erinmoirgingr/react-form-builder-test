@@ -1,8 +1,10 @@
-module.exports = function(markup) {
+import JSDOM from "jsdom";
+
+export default function(markup) {
   if (typeof document !== 'undefined') return;
-  
-  var jsdom = require('jsdom').jsdom;
-  
+
+  var jsdom = JSDOM.jsdom;
+
   global.document = jsdom(markup || '');
   global.window = document.parentWindow;
 

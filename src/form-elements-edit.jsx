@@ -14,6 +14,9 @@ export default class FormElementsEdit extends React.Component {
             options: [],
             defaultValue: false
         }
+        this.refElems = {
+          options: React.createRef(),
+        }
     }
 
     getOptions(url) {
@@ -106,7 +109,7 @@ export default class FormElementsEdit extends React.Component {
 
     editVisibility(value) {
         let thisElement = this.state.element;
-        
+
         if(value === '') {
             thisElement.adminOnly  = false;
             thisElement.publicOnly = false;
@@ -127,7 +130,7 @@ export default class FormElementsEdit extends React.Component {
     editRequired(value) {
             value       = value.split(',');
         let thisElement = this.state.element;
-        
+
         if(_.isEmpty(value) || value.length === 0) {
             thisElement.requiredPublic  = false;
             thisElement.requiredAdmin   = false;
@@ -137,7 +140,7 @@ export default class FormElementsEdit extends React.Component {
             } else {
                 thisElement.requiredAdmin   = false;
             }
-            
+
             if(value.indexOf('customers') > -1) {
                 thisElement.requiredPublic  = true;
             } else {
@@ -258,7 +261,7 @@ export default class FormElementsEdit extends React.Component {
                 { this.props.element.hasOwnProperty('filePath') &&
                     <div className="form-group">
                         <label>File URL:</label>
-                        <input defaultValue={this.props.element.filePath} onBlur={this.updateElement.bind(this)} onChange={this.editElementProp.bind(this, 'filePath', 'value')} />    
+                        <input defaultValue={this.props.element.filePath} onBlur={this.updateElement.bind(this)} onChange={this.editElementProp.bind(this, 'filePath', 'value')} />
                     </div>
                 }
                 { this.props.element.hasOwnProperty('href') &&
@@ -313,7 +316,7 @@ export default class FormElementsEdit extends React.Component {
                                     value     = {required} />
                             </div>
                         </div>
-                        {this.props.reservationTypes.length > 0 && required.length > 0 && 
+                        {this.props.reservationTypes.length > 0 && required.length > 0 &&
                             <div className="form-group">
                                 <div className="form-group-range">
                                     <label>For Which Reservation Types is This Field Required?</label>
@@ -467,7 +470,7 @@ export default class FormElementsEdit extends React.Component {
                 }
                 { this.props.element.hasOwnProperty('options') && !this.props.element.optionsUrl &&
                     <div className="form-group">
-                        <DynamicOptionList ref="options" data={this.props.preview.state.data} updateElement={this.updateElement.bind(this)} preview={this.props.preview} element={this.props.element} key={this.props.element.options.length} isSystemField={systemFieldChecked} />
+                        <DynamicOptionList ref={this.refElems.options} data={this.props.preview.state.data} updateElement={this.updateElement.bind(this)} preview={this.props.preview} element={this.props.element} key={this.props.element.options.length} isSystemField={systemFieldChecked} />
                     </div>
                 }
                 { this.props.element.hasOwnProperty('optionsUrl') &&

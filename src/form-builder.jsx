@@ -19,6 +19,10 @@ export default class FormBuilder extends React.Component {
     }
     document.addEventListener("click", this.editModeOff.bind(this));
 
+    this.refElems = {
+      formbuilder: React.createRef(),
+    }
+
     // Warn if navigating away and the form is dirty
     window.addEventListener("beforeunload", (e) => {
         if (this.isDirty()) {
@@ -70,7 +74,7 @@ export default class FormBuilder extends React.Component {
   }
 
   isDirty() {
-      return this.refs.formbuilder.state.isDirty;
+      return this.refElems.formbuilder.current.state.isDirty;
   }
 
   save() {
@@ -83,7 +87,7 @@ export default class FormBuilder extends React.Component {
               this.props.onSaveComplete();
           }
 
-          this.refs.formbuilder.setState({
+          this.refElems.formbuilder.current.setState({
               isDirty: false
           });
       }
@@ -101,7 +105,7 @@ export default class FormBuilder extends React.Component {
           <div>
             <div className="react-form-builder-preview pull-left">
               <FormBuilderPreview
-                  ref               = "formbuilder"
+                  ref               = {this.refElems.formbuilder}
                   files             = {this.props.files}
                   manualEditModeOff = {this.manualEditModeOff.bind(this)}
                   parent            = {this}

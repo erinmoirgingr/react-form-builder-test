@@ -7,6 +7,18 @@ import HeaderLabels from './util/header-labels.jsx';
 import { Well } from 'react-bootstrap';
 
 export default class Password extends FormElement {
+
+    constructor(props) {
+      super(props);
+      if(!this.refElems) {
+        this.refElems = {};
+      }
+      this.refElems = {
+        ...this.refElems,
+        confirm: React.createRef(),
+      }
+    }
+
     static toolbarEntry() {
         return {
             element: 'Password',
@@ -27,7 +39,7 @@ export default class Password extends FormElement {
     }
 
     validate() {
-        if (this.refs.input.value !== this.refs.confirm.value) {
+        if (this.refElems.input.current.value !== this.refElems.confirm.current.value) {
             return 'Passwords do not match!';
         }
 
@@ -46,11 +58,11 @@ export default class Password extends FormElement {
         return (
             <Well>
                 <div className="form-group">
-                    <input {...props} />
+                    <input {...props} ref={this.refElems.input} />
                 </div>
                 <div className="form-group">
                     <label htmlFor={this.htmlId + '_confirm'}>{'Confirm ' + this.props.data.label}</label>
-                    <input id={this.htmlId + '_confirm'} ref="confirm" type="password" className="form-control"/>
+                    <input id={this.htmlId + '_confirm'} ref={this.refElems.confirm} type="password" className="form-control"/>
                 </div>
             </Well>
         );
