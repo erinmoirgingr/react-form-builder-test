@@ -20,9 +20,11 @@ export default class ReactForm extends React.Component {
             isDirty: false,
         }
 
-        this.refElems = {};
+        this.refElems = {
+          form: React.createRef(),
+        };
         (props.data || []).forEach(item => {
-          refElems[item.name] = React.createRef();
+          this.refElems[item.name] = React.createRef();
         })
     }
 
@@ -35,7 +37,7 @@ export default class ReactForm extends React.Component {
                         _data: response
                     }, () => {
                       (response || []).forEach(item => {
-                        refElems[item.name] = React.createRef();
+                        this.refElems[item.name] = React.createRef();
                       })
                     });
                 }.bind(this),
@@ -166,7 +168,7 @@ export default class ReactForm extends React.Component {
     * @return {Object} The serialized form
     */
     serialize() {
-        return serializeForm(this.refs.form, {hash: true})
+        return serializeForm(this.refElems.form.current, {hash: true})
     }
 
     submitForm(e, second) {
@@ -177,7 +179,7 @@ export default class ReactForm extends React.Component {
                 this.props.handleSubmit(e, this.serialize());
             }
         } else {
-            let $form = ReactDOM.findDOMNode(this.refs.form);
+            let $form = ReactDOM.findDOMNode(this.refElems.form.current);
             $form.submit();
         }
     }
@@ -392,7 +394,7 @@ export default class ReactForm extends React.Component {
                     {!this.props.isInlineForm &&
                         <form
                             encType         = "multipart/form-data"
-                            ref             = "form"
+                            ref             = {this.refElems.form}
                             action          = {this.props.formAction}
                             method          = {this.props.formMethod}
                             onSubmit        = {this.handleSubmit.bind(this)}
