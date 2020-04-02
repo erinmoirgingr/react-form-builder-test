@@ -23,24 +23,20 @@ export default class ReactForm extends React.Component {
         this.refElems = {
           form: React.createRef(),
         };
-        (props.data || []).forEach(item => {
-          this.refElems[item.name] = React.createRef();
-        })
+
+        this.formRefs = {};
     }
 
     componentDidMount() {
+      const self = this;
         if (this.props.url !== undefined) {
             $.get(
                 this.props.url,
                 function(response) {
-                    this.setState({
+                    self.setState({
                         _data: response
-                    }, () => {
-                      (response || []).forEach(item => {
-                        this.refElems[item.name] = React.createRef();
-                      })
                     });
-                }.bind(this),
+                },
                 'json'
             );
         }
@@ -58,18 +54,17 @@ export default class ReactForm extends React.Component {
     * Validate the form and return errors
     * @return {Promise} Resolves an array of error strings.  The array is empty if the form is valid
     */
+
     validate() {
         let self = this;
-
-        let $form = ReactDOM.findDOMNode(self.refs.form);
         let errors = [];
         let promises = [];
 
         self.state._data.forEach(item => {
-            let $item = self.refs[item.name];
+            let $item = self.formRefs[item.name];
 
             // Don't validate items that weren't actually rendered (like an admin item on a public form)
-            if ($item === undefined) {
+            if ($item === undefined || $item === null) {
                 return;
             }
 
@@ -284,7 +279,6 @@ export default class ReactForm extends React.Component {
             let props = {
                 mutable:        true,
                 key:            item.id + '-' + (item.required ? '1' : '0'),
-                ref:            this.refElems[item.name],
                 data:           item,
                 readOnly:       this.props.readOnly,
                 isTable:        this.props.isTable,
@@ -293,6 +287,7 @@ export default class ReactForm extends React.Component {
                 autoComplete:   this.props.autoComplete,
                 inputPrefix:    this.props.inputPrefix,
                 isVisible:      isVisible,
+                ref:            (el) => {this.formRefs[item.name] = el},
             }
 
             // Use this.props.answerData if available, otherwise use the item's default value
@@ -336,13 +331,12 @@ export default class ReactForm extends React.Component {
                     element,
                     props
                 );
-
                 if (item.hidden && !this.props.isSuperUser) {
                     items.push(
                         <div className="hidden" key={item.id}>{reactElement}</div>
                     );
                 } else {
-                    items.push(reactElement);
+                  items.push(reactElement);
                 }
             } else {
                 console.warn('Invalid element type ' + item.element);
