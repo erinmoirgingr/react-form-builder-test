@@ -87,6 +87,9 @@ export default class ReactForm extends React.Component {
                     _.isUndefined(self.props.reseravtionTypeIds) ||
                     self.props.reservationTypeIds.length === 0
                 ) {
+
+                  console.log($item);
+
                     if (_.isFunction($item.validateRequired)) {
                         let isValid = $item.validateRequired();
 
@@ -112,6 +115,8 @@ export default class ReactForm extends React.Component {
                     _.isUndefined(self.props.reseravtionTypeIds) ||
                     self.props.reservationTypeIds.length === 0
                 ) {
+
+                    console.log($item, $item.validate);
 
                     let isValid = $item.validate();
 

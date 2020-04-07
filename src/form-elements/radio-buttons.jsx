@@ -35,9 +35,9 @@ export default class RadioButtons extends FormElementWithOptions {
     }
 
     validateRequired() {
-        for (let refName in this.refs) {
+        for (let refName in this.refElems) {
             if (refName.indexOf('option_') === 0) {
-                if (this.refs[refName].checked) {
+                if (this.refElems[refName].current.checked) {
                     return true;
                 }
             }

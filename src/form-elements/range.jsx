@@ -39,7 +39,7 @@ export default class Range extends FormElement {
     }
 
      validateRequired() {
-        return parseInt(this.refs.rangeInput.state.value) >= 0;
+        return parseInt(this.refElems.rangeInput.current.state.value) >= 0;
     }
 
     renderReadOnly() {

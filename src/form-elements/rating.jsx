@@ -22,7 +22,7 @@ export default class Rating extends FormElement {
   }
 
   validateRequired() {
-    return this.refs.input.state.rating !== 0;
+    return this.refElems.input.current.state.rating !== 0;
   }
 
   renderComponent() {

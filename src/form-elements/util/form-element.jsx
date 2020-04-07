@@ -82,8 +82,9 @@ export default class FormElement extends SortableItem {
     * @return {boolean}} True if this element has a value, false if not
     */
     validateRequired() {
-        if (this.refs.input !== undefined) {
-            let item = ReactDOM.findDOMNode(this.refs.input);
+        const inputElem = (this.refElems.input || {}).current;
+        if (inputElem !== undefined) {
+            let item = ReactDOM.findDOMNode(inputElem);
 
             return item.value.trim().length > 0;
         }
