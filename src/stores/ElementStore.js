@@ -102,7 +102,6 @@ var ElementStore = Reflux.createStore({
                     }
                 })
             } else {
-                console.log(JSON.stringify(_data));
                 if (onSave) {
                     onSave(JSON.stringify(_data));
                 }

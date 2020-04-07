@@ -57,8 +57,6 @@ export default class FormElementsEdit extends React.Component {
     }
 
      editReservationTypesVisible(value) {
-        console.log('edit res type visible');
-        console.log(value);
 
             value       = value.split(',');
         let thisElement = this.state.element;

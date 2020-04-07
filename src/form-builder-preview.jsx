@@ -140,8 +140,6 @@ export default class FormBuilderPreview extends React.Component {
             }
         });
 
-        console.log(items);
-
         return (
             <div className={classes}>
                 { this.state.errors.length > 0 &&
