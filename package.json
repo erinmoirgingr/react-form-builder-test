@@ -30,7 +30,6 @@
     "form-serialize": "^0.7.2",
     "prop-types": "^15.7.2",
     "react-bootstrap": "^0.33.1",
-    "react-bootstrap-native-slider": "github:erinmoirgingr/react-bootstrap-native-slider-test",
     "react-input-mask": "^2.0.4",
     "react-select": "github:erinmoirgingr/react-select-test",
     "react-signature-pad": "github:erinmoirgingr/react-signature-pad-test",
