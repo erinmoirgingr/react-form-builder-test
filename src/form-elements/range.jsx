@@ -1,6 +1,11 @@
 import React from 'react';
 import FormElement from './util/form-element.jsx';
-import SliderNativeBootstrap from 'react-bootstrap-native-slider';
+
+// Using an ES6 transpiler like Babel
+import Slider from 'react-rangeslider'
+ 
+// To include the default styles
+// import 'react-rangeslider/lib/index.css'
 
 import HeaderBar from './util/header-bar.jsx';
 import HeaderLabels from './util/header-labels.jsx';
@@ -16,6 +21,12 @@ export default class Range extends FormElement {
         ...this.refElems,
         rangeInput: React.createRef(),
       }
+
+      this.state = {
+        value: null,
+      }
+
+      this.setValue = this.setValue.bind(this)
     }
 
     static toolbarEntry() {
@@ -36,6 +47,16 @@ export default class Range extends FormElement {
             minLabel: 'A Little',
             maxLabel: 'A Lot'
         }
+    }
+
+    setValue(val) {
+        this.refElems.rangeInput.current.setState({
+            value: val
+        })
+
+        this.setState({
+            value: val,
+        })
     }
 
      validateRequired() {
@@ -92,13 +113,16 @@ export default class Range extends FormElement {
                         <span className="pull-left">{this.props.data.minLabel}</span>
                         <span className="pull-right">{this.props.data.maxLabel}</span>
                     </div>
-                    <SliderNativeBootstrap
+                    <Slider 
                         ref={this.refElems.rangeInput}
-                        name={props.name}
-                        value={props.defaultValue}
-                        step={this.props.data.step}
+                        value={this.state.value || props.defaultValue}
+                        onChange={this.setValue}
+                        
+                        min={this.props.data.minValue}
                         max={this.props.data.maxValue}
-                        min={this.props.data.minValue} />
+                        step={this.props.data.step} />
+
+                    <input type="hidden" name={props.name} value={this.state.value || props.defaultValue} />
                 </div>
                 <div className="visible_marks">
                     {visible_marks}
