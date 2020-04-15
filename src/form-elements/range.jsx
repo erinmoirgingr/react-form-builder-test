@@ -1,6 +1,5 @@
 import React from 'react';
 import FormElement from './util/form-element.jsx';
-import SliderNativeBootstrap from 'react-bootstrap-native-slider';
 
 import HeaderBar from './util/header-bar.jsx';
 import HeaderLabels from './util/header-labels.jsx';
@@ -92,13 +91,13 @@ export default class Range extends FormElement {
                         <span className="pull-left">{this.props.data.minLabel}</span>
                         <span className="pull-right">{this.props.data.maxLabel}</span>
                     </div>
-                    <SliderNativeBootstrap
+                    {/* <SliderNativeBootstrap
                         ref={this.refElems.rangeInput}
                         name={props.name}
                         value={props.defaultValue}
                         step={this.props.data.step}
                         max={this.props.data.maxValue}
-                        min={this.props.data.minValue} />
+                        min={this.props.data.minValue} /> */}
                 </div>
                 <div className="visible_marks">
                     {visible_marks}
