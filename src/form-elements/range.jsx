@@ -7,25 +7,73 @@ import Slider from 'react-rangeslider'
 // To include the default styles
 // import 'react-rangeslider/lib/index.css'
 
+import HeaderBar from './util/header-bar.jsx';
+import HeaderLabels from './util/header-labels.jsx';
+
 export default class Range extends FormElement {
+
     constructor(props) {
-        super(props);
+      super(props);
+      if(!this.refElems) {
+        this.refElems = {};
+      }
+      this.refElems = {
+        ...this.refElems,
+        rangeInput: React.createRef(),
+      }
 
-        this.state = {
-            value: props.defaultValue !== undefined ? parseInt(props.defaultValue, 10) : parseInt(props.data.defaultValue, 10),
+      this.state = {
+        value: null,
+      }
+
+      this.setValue = this.setValue.bind(this)
+    }
+
+    static toolbarEntry() {
+        return {
+            element: 'Range',
+            displayName: 'Range',
+            icon: 'fa fa-sliders'
+        };
+    }
+
+    static defaultOptions() {
+        return {
+            label: 'Placeholder Label',
+            step: 1,
+            defaultValue: 3,
+            minValue: 1,
+            maxValue: 5,
+            minLabel: 'A Little',
+            maxLabel: 'A Lot'
         }
-
-        this.setValue = this.setValue.bind(this)
     }
 
     setValue(val) {
+        this.refElems.rangeInput.current.setState({
+            value: val
+        })
+
         this.setState({
             value: val,
         })
     }
 
+     validateRequired() {
+        return parseInt(this.state.value) >= 0;
+    }
+
+    renderReadOnly() {
+        let value = _.get(this.props, 'defaultValue', '');
+        if (value) {
+            return value + '/' + this.props.data.maxValue;
+        } else {
+            return '';
+        }
+    }
+
     renderComponent() {
-        let self  = this;
+
         let props = this.baseInputProps();
         props.type = "range";
         props.list = "tickmarks_" + this.props.data.name;
@@ -52,10 +100,10 @@ export default class Range extends FormElement {
             if (idx === 0 || idx === datalist.length-1)
             w = oneBig/2;
             option_props.key = props.list+'_label_'+idx;
-            option_props.style = {width: w + '%', cursor: 'pointer'};
+            option_props.style = {width: w + '%'};
             if (idx === datalist.length-1)
-            option_props.style = {width: w + '%', textAlign: 'right', cursor: 'pointer'};
-            return <label onClick={self.setValue.bind(self, d)} {...option_props}>{d}</label>
+            option_props.style = {width: w + '%', textAlign: 'right'};
+            return <label {...option_props}>{d}</label>
         })
 
         return (
@@ -65,16 +113,14 @@ export default class Range extends FormElement {
                         <span className="pull-left">{this.props.data.minLabel}</span>
                         <span className="pull-right">{this.props.data.maxLabel}</span>
                     </div>
-
                     <Slider 
-                        value={this.state.value}
+                        ref={this.refElems.rangeInput}
+                        value={this.state.value || props.defaultValue}
                         onChange={this.setValue}
                         
                         min={this.props.data.minValue}
                         max={this.props.data.maxValue}
                         step={this.props.data.step} />
-
-
 
                     <input type="hidden" name={props.name} value={this.state.value || props.defaultValue} />
                 </div>
