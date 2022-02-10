@@ -57,7 +57,7 @@
     "mocha": "",
     "mocha-jsdom": "",
     "node-libs-browser": "^2.2.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react-addons-test-utils": "^15.6.2",
     "react-hot-loader": "^4.12.18",
     "sass-loader": "^8.0.2",
